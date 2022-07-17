@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,12 +43,31 @@ public class UserController
         return "user/detail";
     }
 
+    @PostMapping("/login")
+    @ResponseBody
+    public String login(UserForm user)
+    {
+        /*
+            성공 시 "success" 반환.
+            실패 시 실패 원인 문자열 반환
+         */
+
+        return userService.login(user);
+    }
+
+    @RequestMapping("/logout")
+    public String logout()
+    {
+        userService.logout();
+        return "/user/login";
+    }
+
     @PostMapping("/") // 여기로 보내서 회원가입 (생성)
     @ResponseBody
     public String signup(@Valid UserForm user, BindingResult bindingResult)
     {
         // 만일 제약 조건을 만족하지 못하면, 오류 메시지를 출력한다.
-        if(bindingResult.hasErrors())
+        if (bindingResult.hasErrors())
         {
             return bindingResult.getAllErrors().get(0).getDefaultMessage();
         }
@@ -65,5 +85,8 @@ public class UserController
 
         return "success";
     }
+
+
+
 
 }
