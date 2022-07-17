@@ -14,7 +14,7 @@ public class Menu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long menuNo;
+    private Integer menuNo;
 
     @Column(length = 50)
     private String menuComposition;
@@ -25,7 +25,7 @@ public class Menu {
     @Column(length = 1000)
     private String menuDescription;
 
-    private int menuRating;
+    private Integer menuRating;
 
     @Column(length = 1000)
     private String tags;

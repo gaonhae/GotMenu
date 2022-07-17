@@ -1,6 +1,7 @@
 package org.TUK.gotMenu.service;
 
 import lombok.RequiredArgsConstructor;
+import org.TUK.gotMenu.DataNotFoundException;
 import org.TUK.gotMenu.entity.Menu;
 import org.TUK.gotMenu.repository.MenuRepository;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +35,15 @@ public class MenuService {
         sorts.add(Sort.Order.desc("menuNo"));
         Pageable pageable = PageRequest.of(page, 30, Sort.by(sorts));
         return this.menuRepository.findAll(pageable);
+    }
+
+    public Menu getMenu(Integer menuNo){
+        Optional<Menu> menu = this.menuRepository.findById(menuNo);
+        if( menu.isPresent()) {
+            return menu.get();
+        }
+        else {
+            throw new DataNotFoundException("question not found");		}
     }
 
 }
