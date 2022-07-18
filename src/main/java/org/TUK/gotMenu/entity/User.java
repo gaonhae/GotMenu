@@ -18,7 +18,7 @@ public class User
 
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY )
     @Column(name="user_no", nullable = false)
-    Long userNo; // 기본키
+    int userNo; // 기본키
 
     @Column(unique = true, nullable = false)
     String id; // ID 겸 닉네임

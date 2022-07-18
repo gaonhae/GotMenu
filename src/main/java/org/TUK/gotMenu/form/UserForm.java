@@ -17,7 +17,7 @@ import org.springframework.lang.Nullable;
 // DTO에는 무조건 NoArgsConstructor가 있어야한다. 그래야 BindingResult를 쓸 수 있음.
 public class UserForm
 {
-    private long userNo;
+    private int userNo;
 
     @Size(min = 2, max = 28, message = "ID는 2자에서 28자 사이로 해야합니다.")
     @NotEmpty(message = "사용자ID는 필수항목입니다.")

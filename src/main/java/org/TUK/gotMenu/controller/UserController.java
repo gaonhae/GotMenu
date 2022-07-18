@@ -1,21 +1,18 @@
 package org.TUK.gotMenu.controller;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.TUK.gotMenu.form.UserForm;
 import org.TUK.gotMenu.service.UserService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -37,7 +34,7 @@ public class UserController
         return "user/login";
     }
 
-    @RequestMapping("/detail")
+    @RequestMapping("/{userNo}")
     public String detail()
     {
         return "user/detail";
@@ -86,7 +83,17 @@ public class UserController
         return "success";
     }
 
+    @GetMapping("/")
+    @ResponseBody
+    public void getUser(HttpServletResponse response, @Param("userNo") int userNo)
+    {
+        try
+        {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json"); // JSON
+            response.getWriter().println(userService.getUserDetail(userNo));
+        }
+        catch(Exception e){e.printStackTrace();}
 
-
-
+    }
 }

@@ -5,6 +5,7 @@ import org.TUK.gotMenu.SessionCode;
 import org.TUK.gotMenu.entity.User;
 import org.TUK.gotMenu.form.UserForm;
 import org.TUK.gotMenu.repository.UserRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +61,28 @@ public class UserService
         session.setAttribute(SessionCode.PASSWORD.toString(), null);
 
         return;
+    }
+
+    // 유저 정보 전송
+    public JSONObject getUserDetail(Integer userNo)
+    {
+        JSONObject object = new JSONObject();
+        User userEntity = userRepository.findByUserNo(userNo);
+        if(userEntity == null) return object;
+
+        // JSON 오브젝트에 유저 정보 담아주기
+        object.put("userNo", userEntity.getUserNo());
+        object.put("id", userEntity.getId());
+        object.put("password", userEntity.getPassword());
+        object.put("joinDate", userEntity.getJoinDate());
+        object.put("userDetail", userEntity.getUserDetail());
+
+        // 세션에 담긴 번호(현재 유저 번호)와 요청 받은 유저 번호가 같다면 true를 보낸다.
+        boolean same = (Integer)request.getSession().getAttribute(SessionCode.USER_NO.toString()) == userNo;
+        object.put("same", same);
+
+        return object;
+
     }
 
 
