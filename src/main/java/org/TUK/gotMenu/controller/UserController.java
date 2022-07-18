@@ -83,7 +83,7 @@ public class UserController
         return "success";
     }
 
-    @GetMapping("/")
+    @GetMapping("/") // 조회 (Read)
     @ResponseBody
     public void getUser(HttpServletResponse response, @Param("userNo") int userNo)
     {
@@ -96,4 +96,26 @@ public class UserController
         catch(Exception e){e.printStackTrace();}
 
     }
+
+    @PutMapping("/") // 수정 (Update)
+    @ResponseBody
+    public String update(@Valid UserForm user, BindingResult errors)
+    {
+        if(errors.hasErrors())
+        {
+            return errors.getAllErrors().get(0).getDefaultMessage();
+        }
+
+        return userService.update(user);
+    }
+    @DeleteMapping("/")
+    @ResponseBody
+    public String delete(@Param("userNo") int userNo)
+    {
+        userService.logout();
+        userService.delete(userNo);
+
+        return "success";
+    }
+
 }

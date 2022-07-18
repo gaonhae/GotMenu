@@ -63,7 +63,7 @@ public class UserService
         return;
     }
 
-    // 유저 정보 전송
+    // 유저 정보를 JSON에 담아서 반환
     public JSONObject getUserDetail(Integer userNo)
     {
         JSONObject object = new JSONObject();
@@ -84,6 +84,24 @@ public class UserService
         return object;
 
     }
+    // 유저 정보를 받아 업데이트
+    public String update(UserForm user)
+    {
+        User entity = userRepository.findByUserNo(user.getUserNo());
+        entity.setId(user.getId());
+        entity.setPassword(user.getPassword());
+        entity.setUserDetail(user.getUserDetail());
 
+        userRepository.save(entity);
+
+        return "success";
+    }
+
+    public void delete(int userNo)
+    {
+       User user = userRepository.findByUserNo(userNo);
+       userRepository.delete(user);
+
+    }
 
 }
