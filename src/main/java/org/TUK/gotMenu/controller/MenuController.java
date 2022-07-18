@@ -2,13 +2,15 @@ package org.TUK.gotMenu.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.TUK.gotMenu.entity.Menu;
+import org.TUK.gotMenu.form.MenuForm;
 import org.TUK.gotMenu.service.MenuService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RequestMapping("/menu")
 @Controller
@@ -29,6 +31,20 @@ public class MenuController {
         Menu menu = this.menuService.getMenu(id);
         model.addAttribute("menu", menu);	//템플릿에 질문의 상세 내용을 넘겨줌
         return "menuDetail";
+    }
+
+    @GetMapping("/create")
+    public String create(MenuForm menuForm){
+       return "menuForm";
+    }
+
+    @PostMapping("/create")
+    public String create(@Valid MenuForm menuForm, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "menuForm";
+        }
+        this.menuService.create(menuForm.getMenuComposition(), menuForm.getMenuDetail(), menuForm.getMenuDescription(), 0, menuForm.getTags());
+        return "redirect:/menu/list";
     }
 
 
