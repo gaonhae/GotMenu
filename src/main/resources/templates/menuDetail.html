@@ -5,16 +5,18 @@
 	<h2 class="border-bottom py-2" th:text="${menu.menuComposition}"></h2>
 	<div class="card my-3">
 		<div class="card-body">
-			<div class="card-text" style="white-space: pre-line" th:text="${menu.menuDetail}"></div>
+			<div class="card-text bg-light text-dark" style="white-space: pre-line" th:text="${menu.menuDetail}"></div>
 			<div class="card-text" style="white-space: pre-line" th:text="${menu.menuDescription}"></div>
 			<div class="d-flex justify-content-end">
 				<div class="badge bg-light text-dark p-2 text-start">
 					<div th:text="${menu.tags}"></div>
-					<div th:text="${menu.menuRating}"></div>
 				</div>
 			</div>
-			</div>
 		</div>
+		<div class="badge bg-light text-dark p-2 text-start">
+			<div th:text="${menu.menuRating}"></div>
+		</div>
+	</div>
 	<!-- 답변의 갯수 표시 -->
 <!--	<h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>-->
 	<!-- 답변 리스트 구현 시작 -->
