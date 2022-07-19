@@ -26,7 +26,7 @@ public class MenuController {
         return "menuList";
     }
 
-    @RequestMapping("/detail/{menuNo}")
+    @RequestMapping("/{menuNo}/detail")
     public String detail(Model model, @PathVariable("menuNo") Integer id) {
         Menu menu = this.menuService.getMenu(id);
         model.addAttribute("menu", menu);	//템플릿에 질문의 상세 내용을 넘겨줌
@@ -47,6 +47,33 @@ public class MenuController {
         return "redirect:/menu/list";
     }
 
+    @GetMapping("/{menuNo}/modify")
+    public String modify(MenuForm menuForm, @PathVariable("menuNo") Integer menuNo){
+        Menu menu = this.menuService.getMenu(menuNo);
+        menuForm.setMenuDescription(menu.getMenuDescription());
+        menuForm.setMenuDetail(menu.getMenuDetail());
+        menuForm.setMenuComposition(menu.getMenuComposition());
+        menuForm.setTags(menu.getTags());
+        return "menuForm";
+    }
 
+
+    @PostMapping("/{menuNo}/modify")
+    public String modify(@Valid MenuForm menuForm, @PathVariable("menuNo") Integer menuNo, BindingResult bindingResult){
+        Menu menu = this.menuService.getMenu(menuNo);
+        if(bindingResult.hasErrors()){
+            return "menuForm";
+        }
+        this.menuService.modify(menu, menuForm.getMenuComposition(), menuForm.getMenuDetail(), menuForm.getMenuDescription(), menuForm.getTags());
+        return String.format("redirect:/menu/%s/detail",menuNo);
+    }
+
+
+    @GetMapping("/{menuNo}/delete")
+    public String delete(@PathVariable("menuNo") Integer menuNo){
+        Menu menu = this.menuService.getMenu(menuNo);
+        this.menuService.delete(menu);
+        return "redirect:/menu/list";
+    }
 
 }

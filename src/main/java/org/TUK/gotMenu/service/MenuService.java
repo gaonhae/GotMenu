@@ -46,4 +46,16 @@ public class MenuService {
             throw new DataNotFoundException("question not found");		}
     }
 
+    public void modify(Menu menu, String menuComposition, String mennuDetail, String menuDescription, String tags){
+        menu.setMenuComposition(menuComposition);
+        menu.setMenuDetail(mennuDetail);
+        menu.setMenuDescription(menuDescription);
+        menu.setTags(tags);
+        this.menuRepository.save(menu);
+    }
+
+    public void delete(Menu menu){
+        this.menuRepository.delete(menu);
+    }
+
 }

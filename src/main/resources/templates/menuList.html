@@ -13,7 +13,7 @@
             <tr class="text-center" th:each="menu, loop : ${paging}">       <!--질문의 수만큼 loop, question은 paging변수의 객체, loop는 인덱스-->
                 <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
                 <td class="text-start">
-                    <a th:href="@{|/menu/detail/${menu.menuNo}|}" th:text="${menu.menuComposition}"></a>
+                    <a th:href="@{|/menu/${menu.menuNo}/detail|}" th:text="${menu.menuComposition}"></a>
 <!--                    답변 개수 표시-->
 <!--                    <span class="text-danger small ms-2"-->
 <!--                          th:if="${#lists.size(menu.answerList) > 0}"-->
