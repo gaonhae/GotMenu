@@ -8,11 +8,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +28,7 @@ public class MenuService {
 
     private final MenuRepository menuRepository;
 
-    public void create(String menuComposition, String menuDetail, String menuDescription, int menuRating, String tags){
+    public void create(String menuComposition, String menuDetail, String menuDescription, int menuRating, String tags) {
         Menu m = new Menu();
         m.setMenuComposition(menuComposition);
         m.setMenuDetail(menuDetail);
@@ -30,23 +38,23 @@ public class MenuService {
         this.menuRepository.save(m);
     }
 
-    public Page<Menu> getList(int page){	//MenuList 템플릿에 넘겨 페이징을 위해 사용
+    public Page<Menu> getList(int page, String kw) {    //MenuList 템플릿에 넘겨 페이징을 위해 사용
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("menuNo"));
         Pageable pageable = PageRequest.of(page, 30, Sort.by(sorts));
-        return this.menuRepository.findAll(pageable);
+        return this.menuRepository.findAllByKeyword(kw, pageable);
     }
 
-    public Menu getMenu(Integer menuNo){
+    public Menu getMenu(Integer menuNo) {
         Optional<Menu> menu = this.menuRepository.findById(menuNo);
-        if( menu.isPresent()) {
+        if (menu.isPresent()) {
             return menu.get();
+        } else {
+            throw new DataNotFoundException("question not found");
         }
-        else {
-            throw new DataNotFoundException("question not found");		}
     }
 
-    public void modify(Menu menu, String menuComposition, String mennuDetail, String menuDescription, String tags){
+    public void modify(Menu menu, String menuComposition, String mennuDetail, String menuDescription, String tags) {
         menu.setMenuComposition(menuComposition);
         menu.setMenuDetail(mennuDetail);
         menu.setMenuDescription(menuDescription);
@@ -54,8 +62,31 @@ public class MenuService {
         this.menuRepository.save(menu);
     }
 
-    public void delete(Menu menu){
+    public void delete(Menu menu) {
         this.menuRepository.delete(menu);
     }
+
+    public String[] splitTags(Menu menu) {
+        String joinedTags = menu.getTags();
+        String[] splitedTags = joinedTags.split("#");
+        return splitedTags;
+    }
+
+
+    public List<Menu> filter(String flt) {
+        List<Menu> menus = this.menuRepository.findAll();
+        List<Menu> tmp = new ArrayList<Menu>();
+        for (Menu m : menus) {
+            for (String s : splitTags(m)) {
+                if (s == flt) {
+                    tmp.add(m);
+                    break;
+                }
+            }
+        }
+        return tmp;
+    }
+
+
 
 }

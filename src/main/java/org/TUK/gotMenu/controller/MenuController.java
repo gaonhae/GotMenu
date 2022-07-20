@@ -20,9 +20,10 @@ public class MenuController {
     private final MenuService menuService;
 
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page){
-        Page<Menu> paging = this.menuService.getList(page);
+    public String list(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw){
+        Page<Menu> paging = this.menuService.getList(page, kw);
         model.addAttribute("paging", paging);	//템플릿에 페이징에 대한 내용을 넘겨줌
+        model.addAttribute("kw", kw);   //템플릿에 검색 키워드에 대한 내용을 넘겨줌
         return "menuList";
     }
 
@@ -74,6 +75,12 @@ public class MenuController {
         Menu menu = this.menuService.getMenu(menuNo);
         this.menuService.delete(menu);
         return "redirect:/menu/list";
+    }
+
+
+    @GetMapping("/list/filter")
+    public void filter(){
+
     }
 
 }
