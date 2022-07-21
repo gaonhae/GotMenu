@@ -56,7 +56,7 @@ public class UserController
     public String logout()
     {
         userService.logout();
-        return "/user/login";
+        return "/main/home";
     }
 
     @PostMapping("/") // 여기로 보내서 회원가입 (생성)

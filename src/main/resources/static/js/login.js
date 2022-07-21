@@ -13,7 +13,8 @@ function login()
 
            success : function(message)
            {
-               alert(message);
+               if(message == "success") location.href = "/";
+               else alert(message);
            },
            error : function(e)
            {

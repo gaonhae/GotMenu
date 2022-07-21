@@ -101,10 +101,9 @@ function reviseMode()
 
                        success : function(message)
                        {
-
                             if(message == "success")
                             {
-                                location.href = "/user/login";
+                                location.href = "/";
                             }
                             else
                             {
