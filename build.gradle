@@ -29,6 +29,12 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+	implementation 'org.springframework.boot:spring-boot-starter-validation'   //form의 유효성 검사를 위해
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'   //타임리프 상속을 위해
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
+	implementation group: 'org.json', name: 'json', version: '20220320' // JSON 라이브러리
 }
 
 tasks.named('test') {
