@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+
+    <!-- JQuery -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+    </script>
+
+</head>
+<body>
+
+    유저번호 : <input id="userNo" type="text" disabled> <br>
+    ID : <input id="id" type="text" disabled> <br>
+    패스워드 : <input id="password" type="text" disabled> <br>
+    가입일 : <input id="joinDate" type="text" disabled> <br>
+    유저 설명 : <br><textarea id="userDetail" disabled></textarea>
+
+    <div id="alter">
+        <button id="revise" onclick="reviseMode()">수정</button>
+        <button id="delete" onclick="remove()">삭제</button>
+    </div>
+
+
+    <script src="/js/detail.js"></script>
+    <script>
+        $("#alter").hide();
+        detail();
+    </script>
+
+</body>
+</html>
