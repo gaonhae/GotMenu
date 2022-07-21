@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <!-- JQuery -->
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+    </script>
+
+</head>
+<body>
+
+    <a th:href="@{/user/login}" th:if = "${ session.USER_NO == null }"><button>LogIn</button></a>
+    <a th:href="@{/user/logout}" th:if = "${ session.USER_NO != null }"><button>LogOut</button></a>
+    <a th:href="@{/user/signup}" th:if = "${ session.USER_NO == null }"><button type="button" class="btn btn-warning" >Sign-up</button></a>
+    <button type="button" class="btn btn-warning" th:if = "${ session.USER_NO != null }" th:text="${session.ID}">Sign-up</button>
+
+    <br><br>
+    <label>ID </label>: <input type="text" id="id"> <br>
+    <label>PW </label>: <input type="text" id="pw"> <br>
+    <button onclick="login()">확인</button>
+
+    <script src="/js/login.js"></script>
+</body>
+</html>
