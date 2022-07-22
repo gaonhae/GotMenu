@@ -3,6 +3,7 @@ package org.TUK.gotMenu.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -20,6 +21,8 @@ public class Comment
     @Column(nullable = false)
     String content;
     String recomment;
+    @NotNull
+    String resistDate;
 
     @ManyToOne(cascade = CascadeType.DETACH)
     User user;

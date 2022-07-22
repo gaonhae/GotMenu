@@ -2,6 +2,7 @@ package org.TUK.gotMenu.service;
 
 import lombok.RequiredArgsConstructor;
 import org.TUK.gotMenu.SessionCode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class SecurityService
 {
-    HttpServletRequest request;
+    @Autowired
+    final HttpServletRequest request;
 
     public boolean isLogin()
     {
@@ -22,8 +24,16 @@ public class SecurityService
 
     }
 
-    public long getUserNo()
+    // 현재 세션에 저장되어 있는 유저 번호를 반환
+    public int getUserNo()
     {
-        return (long)request.getSession().getAttribute(SessionCode.USER_NO.toString());
+        return (int)request.getSession().getAttribute(SessionCode.USER_NO.toString());
     }
+
+    // 인수로 받은 번호와 현재 유저 번호가 같다면 true
+    public boolean isSameUser(int userNo)
+    {
+        return (userNo == getUserNo());
+    }
+
 }

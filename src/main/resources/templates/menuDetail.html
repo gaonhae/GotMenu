@@ -24,7 +24,47 @@
 		<a class="btn btn-sm btn-outline-secondary" th:href="@{|/menu/${menu.menuNo}/delete|}" th:text="삭제하기"></a>
 	</div>
 	<a class="btn btn-sm btn-outline-secondary" th:href="@{/menu/list}" th:text="홈으로"></a>
+
+	<!-- 댓글 들어갈 자리 -->
+	<div id="commentContainer">
+
+	</div>
+
+
+	<!-- 댓글 쓰기 인터페이스 -->
+	<div id="myCmt" class="commentBox">
+		<div class="commentTitle">
+			<label id="myId">userId</label>
+		</div>
+		<div>
+			<textarea id="myContent" class="commentContent" cols=50 rows=5></textarea>
+			<button id="mySubmit" onclick="create()">확인</button>
+		</div>
+
+	</div>
+
+
 	<!-- 답변의 갯수 표시 -->
+
+	<script src="/js/comment/comment.js"></script>
+	<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+		var no = /*[[${session.USER_NO}]]*/;
+		var id = /*[[${session.ID}]]*/;
+    	getSession(no, id);
+
+		// 로그인도 안한 놈이 댓글 달면 안된다.
+		if(no == null) $("#myCmt").hide();
+		$("#myId").text(id);
+
+		getCommentList();
+
+    /*]]>*/
+
+</script>
+
 <!--	<h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>-->
 	<!-- 답변 리스트 구현 시작 -->
 <!--	<div class="card my-3" th:each="answer : ${question.answerList}">-->
