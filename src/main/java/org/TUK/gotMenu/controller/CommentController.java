@@ -8,10 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -47,6 +44,14 @@ public class CommentController
         }
         catch(Exception e){e.printStackTrace();}
 
+    }
+
+    @DeleteMapping("/")
+    @ResponseBody
+    public String delete(@Param("commentNo") int commentNo)
+    {
+
+        return commentService.delete(commentNo);
     }
 
 

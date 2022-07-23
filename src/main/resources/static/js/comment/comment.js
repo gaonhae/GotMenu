@@ -57,6 +57,9 @@ function getCommentSuccess(data)
     for(var i=0; i < data.array.length; i++)
     {
         var userDetail = "/user/" + data.array[i].writerNo;
+        //var update = "update(" + data.array[i].commentNo + ")";
+        var remove = "remove(" + data.array[i].commentNo + ")";
+
         commentHtml +=  '<div class="commentBox">'+
         '			<div class="commentTitle">'+
         '				<a class="writerId" href="' + userDetail + '"> ' + data.array[i].writerId + '</a>'+
@@ -69,7 +72,7 @@ function getCommentSuccess(data)
         if(data.array[i].isSameUser) // 만약 현재 유저와 작성자가 같다면 수정/삭제 버튼을 보여준다.
         commentHtml +=
         '			<div class="buttonBox">'+
-        '				<button onclick="">수정</button> <button onclick="">삭제</button>'+
+        '				<button onclick="">수정</button> <button onclick="' + remove + '">삭제</button>'+
         '			</div>'+
         '		</div>';
         else // 아니라면 그냥 div를 닫아준다.
@@ -92,14 +95,30 @@ function getCommentSuccess(data)
 
 }
 
-function update()
+function update(commentNo)
 {
 
 }
 
-function remove()
+function remove(commentNo)
 {
-    
+    var result = confirm("삭제하시겠습니까?");
+    if(result == false) return;
+
+    $.ajax({
+        url : '/comment/',
+        data : {"commentNo" : commentNo},
+        method : "DELETE",
+        success : message => {
+            if(message == "success")
+             {
+                getCommentList(0);
+                alert("댓글 삭제 성공");
+             }
+            else alert(message);
+        },
+        error : e => alert(e.responseText)
+    })
 
 }
 

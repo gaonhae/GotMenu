@@ -58,7 +58,7 @@ public class CommentService
         if(page.getTotalPages() < btnEnd) btnEnd = page.getTotalPages();
 
 
-        // JSON 배열에 댓글에 대한 정보를 담아준다.
+        // JSONArray에 댓글에 대한 정보를 담아준다.
         JSONArray array = new JSONArray();
         for(Comment c : page)
         {
@@ -73,13 +73,27 @@ public class CommentService
             array.put(cJson);
         }
 
-
+        // 버튼 정보 / 댓글 리스트를 JSON에 넣어주기
         objects.put("btnStart", btnStart);
         objects.put("btnEnd", btnEnd);
         objects.put("pageNo", pageNo);
         objects.put("array", array);
 
         return objects.toString();
+    }
+
+    public String delete(int commentNo)
+    {
+        Comment comment = commentRepository.findByCommentNo(commentNo);
+        try
+        {
+            commentRepository.delete(comment);
+            return "success";
+        }
+        catch(RuntimeException e)
+        {
+            return "댓글 삭제 실패";
+        }
     }
 
 }
