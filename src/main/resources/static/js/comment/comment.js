@@ -25,7 +25,7 @@ function create()
                 if(message == "success")
                 {
                     $("#myContent").val("");
-                    getCommentList();
+                    getCommentList(0);
                 }
                 else
                 {
@@ -37,40 +37,58 @@ function create()
         });
 }
 
-function getCommentList()
+function getCommentList(pageNo)
 {
     $.ajax({
         url     : "/comment/",
-        data    : {"menuNo" : getNo()},
+        data    : {"menuNo" : getNo(), "pageNo" : pageNo},
         method  : "GET",
-        success : setCommentList,
+        success : getCommentSuccess,
         fail    : e => alert(e.responseText)
 
     })
 }
 
 
-function setCommentList(data)
+function getCommentSuccess(data)
 {
-    var html = "";
-    for(var i=0; i < data.length; i++)
+    // 댓글 리스트를 뿌려주는 부분
+    var commentHtml = "";
+    for(var i=0; i < data.array.length; i++)
     {
         var userDetail = "/user/" + data.array[i].writerNo;
-        html +=  '<div class="commentBox">'+
+        commentHtml +=  '<div class="commentBox">'+
         '			<div class="commentTitle">'+
         '				<a class="writerId" href="' + userDetail + '"> ' + data.array[i].writerId + '</a>'+
         '				<label>' + data.array[i].resistDate + '</label>'+
         '			</div>'+
         '			<div>'+
-        '				<textarea class="commentContent" cols=50 rows=5 disabled>' + data.array[i].content + '</textarea>'+
-        '			</div>'+
+        '				<textarea class="commentContent" cols=50 rows=3 disabled>' + data.array[i].content + '</textarea>'+
+        '			</div>';
+
+        if(data.array[i].isSameUser) // 만약 현재 유저와 작성자가 같다면 수정/삭제 버튼을 보여준다.
+        commentHtml +=
         '			<div class="buttonBox">'+
         '				<button onclick="">수정</button> <button onclick="">삭제</button>'+
         '			</div>'+
         '		</div>';
+        else // 아니라면 그냥 div를 닫아준다.
+         commentHtml += '		</div>';
+
 
     }
-    $("#commentContainer").html(html);
+
+    // 페이지 버튼을 만들어주는 부분
+    var pageHtml = "";
+    for(var i = data.btnStart; i < data.btnEnd; i++)
+    {
+        var link = "getCommentList(" + i + ")";
+        if(i == data.pageNo) pageHtml += '<button style="text-decoration: underline;" onclick="' + link + '">' + (i+1) + '</button>';
+        else pageHtml += '<button onclick="' + link + '">' + (i+1) + '</button>';
+    }
+
+    $("#commentContainer").html(commentHtml);
+    $("#pageBox").html(pageHtml);
 
 }
 
@@ -81,6 +99,7 @@ function update()
 
 function remove()
 {
+    
 
 }
 

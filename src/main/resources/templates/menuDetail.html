@@ -29,7 +29,9 @@
 	<div id="commentContainer">
 
 	</div>
+	<div id="pageBox">
 
+	</div>
 
 	<!-- 댓글 쓰기 인터페이스 -->
 	<div id="myCmt" class="commentBox">
@@ -47,6 +49,11 @@
 	<!-- 답변의 갯수 표시 -->
 
 	<script src="/js/comment/comment.js"></script>
+
+	<script>
+		getCommentList(0);
+	</script>
+
 	<script th:inline="javascript">
 
     /*<![CDATA[*/
@@ -57,9 +64,7 @@
 
 		// 로그인도 안한 놈이 댓글 달면 안된다.
 		if(no == null) $("#myCmt").hide();
-		$("#myId").text(id);
-
-		getCommentList();
+		else $("#myId").text(id);
 
     /*]]>*/
 

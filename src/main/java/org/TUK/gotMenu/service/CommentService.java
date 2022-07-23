@@ -7,6 +7,10 @@ import org.TUK.gotMenu.repository.CommentRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -40,15 +44,23 @@ public class CommentService
         }
     }
 
-    public String read(int menuNo)
+    public String read(int menuNo, int pageNo)
     {
-
         JSONObject objects = new JSONObject();
-        List<Comment> commentList = commentRepository.findByMenuNo(menuNo);
 
-        // 배열에 정보를 담아준다.
+        Pageable pageable = PageRequest.of(pageNo, 5);
+        Page<Comment> page = commentRepository.findByMenuNo(menuNo, pageable);
+
+        // 댓글 페이지를 넘길 수 있는 페이지 버튼 설정.
+        int btnStart = pageNo - 2;
+        int btnEnd = pageNo + 3;
+        if(btnStart < 0) btnStart = 0;
+        if(page.getTotalPages() < btnEnd) btnEnd = page.getTotalPages();
+
+
+        // JSON 배열에 댓글에 대한 정보를 담아준다.
         JSONArray array = new JSONArray();
-        for(Comment c : commentList)
+        for(Comment c : page)
         {
             JSONObject cJson = new JSONObject();
             cJson.put("commentNo", c.getCommentNo());
@@ -62,7 +74,9 @@ public class CommentService
         }
 
 
-        objects.put("length", commentList.size());
+        objects.put("btnStart", btnStart);
+        objects.put("btnEnd", btnEnd);
+        objects.put("pageNo", pageNo);
         objects.put("array", array);
 
         return objects.toString();

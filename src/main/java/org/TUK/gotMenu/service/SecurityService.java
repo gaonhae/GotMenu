@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 
 @RequiredArgsConstructor
@@ -25,15 +26,17 @@ public class SecurityService
     }
 
     // 현재 세션에 저장되어 있는 유저 번호를 반환
-    public int getUserNo()
+    public Integer getUserNo()
     {
-        return (int)request.getSession().getAttribute(SessionCode.USER_NO.toString());
+        return (Integer)request.getSession().getAttribute(SessionCode.USER_NO.toString());
     }
 
     // 인수로 받은 번호와 현재 유저 번호가 같다면 true
-    public boolean isSameUser(int userNo)
+    public boolean isSameUser(Integer userNo)
     {
-        return (userNo == getUserNo());
+        Integer sNo = getUserNo();
+        if(sNo == null) return false;
+        return (sNo == userNo);
     }
 
 }

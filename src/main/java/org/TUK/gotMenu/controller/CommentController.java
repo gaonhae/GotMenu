@@ -37,13 +37,13 @@ public class CommentController
     }
     @GetMapping("/")
     @ResponseBody
-    public void read(HttpServletResponse response, @Param("menuNo") int menuNo )
+    public void read(HttpServletResponse response, @Param("menuNo") int menuNo, @Param("pageNo") int pageNo)
     {
         try
         {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json"); // JSON
-            response.getWriter().println(commentService.read(menuNo));
+            response.getWriter().println(commentService.read(menuNo, pageNo));
         }
         catch(Exception e){e.printStackTrace();}
 
