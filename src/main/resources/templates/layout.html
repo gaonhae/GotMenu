@@ -1,51 +1,11 @@
 <!doctype html>
-<html lang="ko">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-    <title>갓메뉴</title>
-</head>
-<body>
-<!--네비바 구현 시작-->
-<!--<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">-->
-<!--    <div class="container-fluid">-->
-<!--        <a class="navbar-brand" href="/">SBB</a>-->
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"-->
-<!--            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link">로그인</a>-->
-<!--                    <a class="nav-link">로그아웃</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link">회원가입</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
-<!--네비바 구현 종료-->
-<!-- 기본 템플릿 안에 삽입될 내용 Start -->
-<th:block layout:fragment="content"></th:block>
-<!-- 기본 템플릿 안에 삽입될 내용 End -->
-<!-- Bootstrap JS -->
-<th:block layout:fragment="script"></th:block>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-=======
-
-<!doctype html>
 <html lagn="ko">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+
     <!-- JQuery -->
     <script
             src="https://code.jquery.com/jquery-3.6.0.js"
@@ -60,6 +20,9 @@
     <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
 
+    <!-- 은수의 CSS -->
+    <link href="/css/comment/comment.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -73,7 +36,7 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="/menu/1/" class="nav-link px-2 text-white">menu</a></li>
+                <li><a href="/menu/list/" class="nav-link px-2 text-white">menu</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">About</a></li>
             </ul>
 

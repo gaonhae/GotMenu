@@ -56,9 +56,7 @@ public class UserService
     {
         // ID와 패스워드가 전부 맞았다면, 세션에 필요한 정보들을 담아준다.
         HttpSession session = request.getSession();
-        session.setAttribute(SessionCode.USER_NO.toString(), null);
-        session.setAttribute(SessionCode.ID.toString(), null);
-        session.setAttribute(SessionCode.PASSWORD.toString(), null);
+        session.invalidate();
 
         return;
     }
@@ -101,7 +99,6 @@ public class UserService
     {
        User user = userRepository.findByUserNo(userNo);
        userRepository.delete(user);
-
     }
 
 }

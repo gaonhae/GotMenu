@@ -1,0 +1,41 @@
+.commentBox
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    background: lightgray;
+    width: 420px;
+}
+.commentTitle
+{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonBox
+{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.commentContent
+{
+    resize: none;
+}
+.commentContent[disabled]
+{
+    background-color: #FFF !important;
+    color: black;
+}
+
+a.writerId
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+a.writerId:hover
+{
+    color: inherit;
+    text-decoration: underline;
+}

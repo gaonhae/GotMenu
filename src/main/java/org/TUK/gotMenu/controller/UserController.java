@@ -20,8 +20,9 @@ import javax.validation.Valid;
 public class UserController
 {
     @Autowired
-    UserService userService;
+    final UserService userService;
 
+    // 단순 맵핑
     @RequestMapping("/signup")
     public String signup()
     {
@@ -40,6 +41,8 @@ public class UserController
         return "user/detail";
     }
 
+    //////////////////////////////////////////////////////////
+    //유저 API들
     @PostMapping("/login")
     @ResponseBody
     public String login(UserForm user)
@@ -108,7 +111,7 @@ public class UserController
 
         return userService.update(user);
     }
-    @DeleteMapping("/")
+    @DeleteMapping("/") // 삭제 (Delete)
     @ResponseBody
     public String delete(@Param("userNo") int userNo)
     {
