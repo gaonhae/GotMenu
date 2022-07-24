@@ -16,10 +16,10 @@
 				<a href="/">GotMenu</a>
 			</div>
 			<div class="btn">
-				<a th:href="@{/user/login}" th:if = "${ session.USER_NO == null }"><button type="button" >Login</button></a>
-				<a th:href="@{/user/logout}" th:if = "${ session.USER_NO != null }"><button type="button" >Logout</button></a>
-				<a th:href="@{/user/signup}" th:if = "${ session.USER_NO == null }"><button type="button" >Sign-up</button></a>
-				<a th:href="|/user/${session.USER_NO}|"><button type="button" th:if = "${ session.USER_NO != null }" th:text="${session.ID}">Sign-up</button> </a>
+				<a th:href="@{/user/login}" th:if = "${ session.USER_NO == null }">Login</a>
+				<a th:href="@{/user/logout}" th:if = "${ session.USER_NO != null }">Logout</a>
+				<a th:href="@{/user/signup}" th:if = "${ session.USER_NO == null }">Sign-up</a>
+				<a th:href="|/user/${session.USER_NO}|" th:if = "${ session.USER_NO != null }" th:text="${session.ID}">Sign-up</a>
 
 			</div>
 		</nav>

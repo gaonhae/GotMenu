@@ -36,7 +36,7 @@ public class MenuController {
 
     @GetMapping("/create")
     public String create(MenuForm menuForm){
-       return "menuForm";
+       return "/menu/menuForm";
     }
 
     @PostMapping("/create")
@@ -55,7 +55,7 @@ public class MenuController {
         menuForm.setMenuDetail(menu.getMenuDetail());
         menuForm.setMenuComposition(menu.getMenuComposition());
         menuForm.setTags(menu.getTags());
-        return "menuForm";
+        return "/menu/menuForm";
     }
 
 
