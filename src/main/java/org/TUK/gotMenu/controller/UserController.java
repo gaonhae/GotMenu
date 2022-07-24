@@ -26,7 +26,7 @@ public class UserController
     @RequestMapping("/signup")
     public String signup()
     {
-        return "/user/signup";
+        return "user/signup";
     }
 
     @RequestMapping("/login")
