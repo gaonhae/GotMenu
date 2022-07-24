@@ -82,6 +82,22 @@ public class CommentService
         return objects.toString();
     }
 
+    public String update(int commentNo, String content)
+    {
+        Comment comment = commentRepository.findByCommentNo(commentNo);
+        comment.setContent(content);
+
+        try
+        {
+            commentRepository.save(comment);
+            return "success";
+        }
+        catch(RuntimeException e)
+        {
+            return "수정에 실패했습니다.";
+        }
+    }
+
     public String delete(int commentNo)
     {
         Comment comment = commentRepository.findByCommentNo(commentNo);
