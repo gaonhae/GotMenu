@@ -16,8 +16,11 @@
 				<a href="/">GotMenu</a>
 			</div>
 			<div class="btn">
-				<a href="user/login">로그인</a>
-				<a href="user/signup">회원가입</a>
+				<a th:href="@{/user/login}" th:if = "${ session.USER_NO == null }"><button type="button" >Login</button></a>
+				<a th:href="@{/user/logout}" th:if = "${ session.USER_NO != null }"><button type="button" >Logout</button></a>
+				<a th:href="@{/user/signup}" th:if = "${ session.USER_NO == null }"><button type="button" >Sign-up</button></a>
+				<a th:href="|/user/${session.USER_NO}|"><button type="button" th:if = "${ session.USER_NO != null }" th:text="${session.ID}">Sign-up</button> </a>
+
 			</div>
 		</nav>
 		<!--nevbar end-->
@@ -50,7 +53,7 @@
 			</div>
 		</footer>
 		<!--footer end -->
-		<script src="/js/login.js"></script>
+		<script src="/js/user/login.js"></script>
 	</body>
 </html>
->>>>>>> master
+

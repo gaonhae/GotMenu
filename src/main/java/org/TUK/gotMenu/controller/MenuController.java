@@ -24,14 +24,14 @@ public class MenuController {
         Page<Menu> paging = this.menuService.getList(page, kw);
         model.addAttribute("paging", paging);	//템플릿에 페이징에 대한 내용을 넘겨줌
         model.addAttribute("kw", kw);   //템플릿에 검색 키워드에 대한 내용을 넘겨줌
-        return "menuList";
+        return "/menu/menuList";
     }
 
     @RequestMapping("/{menuNo}/detail")
     public String detail(Model model, @PathVariable("menuNo") Integer id) {
         Menu menu = this.menuService.getMenu(id);
         model.addAttribute("menu", menu);	//템플릿에 질문의 상세 내용을 넘겨줌
-        return "menuDetail";
+        return "/menu/menuDetail";
     }
 
     @GetMapping("/create")
