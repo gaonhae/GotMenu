@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,500;1,400;1,500&display=swap");
+
+body {
+	margin: 0px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
+nav {
+	width: 100vw;
+	background-color: #ad9fe3;
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	height: 100%;
+	display: flex;
+	width: 30%;
+	align-items: center;
+	margin: 0px;
+}
+
+.logo img {
+	margin-left: 150px;
+	height: 80%;
+}
+
+.logo a {
+	margin: 10px;
+	font-size: 25px;
+	text-decoration: none;
+	font-family: "Ubuntu", sans-serif;
+	color: black;
+	font-weight: 600;
+}
+
+.btn {
+	margin-right: 150px;
+	display: flex;
+	align-items: center;
+}
+
+.btn > a {
+	text-decoration: none;
+	color: white;
+	border: white solid 2px;
+	border-radius: 10px;
+	display: inline-block;
+	padding: 5px 10px;
+}
+
+.btn a:nth-child(2) {
+	margin-left: 30px;
+}
+
+.footer {
+	width: 100vw;
+	background-color: #707070;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 13px;
+}
+
+.copyright {
+	margin-left: 150px;
+	display: inline-block;
+	color: #d4d4d4;
+}
+
+.footer-menu {
+	margin: 0px;
+	color: black;
+	list-style: none;
+	width: 50%;
+	text-align: center;
+}
+
+.footer-menu > li {
+	color: #d4d4d4;
+	text-align: center;
+	margin: 0% 3%;
+	display: inline-block;
+	width: 75px;
+}
+
+.tel {
+	color: #d4d4d4;
+	margin-right: 150px;
+}
