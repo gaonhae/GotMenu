@@ -1,31 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Login</title>
-        <link rel="stylesheet" href="../css/style.css">
-        <link rel="stylesheet" href="../css/login.css">
-		<!-- JQuery -->
-		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<!--navbar start-->
-		<nav>
-			<div class="logo">
-				<img src="../img/tray.png" alt="logo" />
-				<a href="/">GotMenu</a>
-			</div>
-			<div class="btn">
-				<a th:href="@{/user/login}" th:if = "${ session.USER_NO == null }">Login</a>
-				<a th:href="@{/user/logout}" th:if = "${ session.USER_NO != null }">Logout</a>
-				<a th:href="@{/user/signup}" th:if = "${ session.USER_NO == null }">Sign-up</a>
-				<a th:href="|/user/${session.USER_NO}|" th:if = "${ session.USER_NO != null }" th:text="${session.ID}">Sign-up</a>
+<html layout:decorate="~{layout}">
 
-			</div>
-		</nav>
-		<!--nevbar end-->
+        <section layout:fragment="content"  class="content">
+			<HEAD>
+				<link rel="stylesheet" href="../css/login.css">
+				<title>Login</title>
 
-        <section class="content">
+			</HEAD>
 			<div class="title">
                 <span>GotMenu에 오신 것을</span><br>
 				<span class="welcome">환영합니다</span>
@@ -39,21 +19,8 @@
                 <input type="text" id="pw" placeholder="비밀번호를 입력해주세요."/>
             </div>
             <button onclick="login()">로그인하고 메뉴 추천하러 가기</button> <!--구현 필요-->
+			<script src="/js/user/login.js"></script>
 		</section>
 
-        <!--footer start -->
-		<footer class="footer">
-			<span class="copyright">CopyrightⓒTUKstudents</span>
-			<ul class="footer-menu">
-				<li>제안하기</li>
-				<li>후원하기</li>
-				<li>제작 과정</li>
-			</ul>
-			<span class="tel">Tel : 010-1234-5678</span>
-			</div>
-		</footer>
-		<!--footer end -->
-		<script src="/js/user/login.js"></script>
-	</body>
 </html>
 

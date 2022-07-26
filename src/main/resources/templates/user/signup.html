@@ -1,29 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Signup</title>
-		<link rel="stylesheet" href="../css/style.css" />
-		<link rel="stylesheet" href="../css/signup.css" />
-		<!-- JQuery -->
-		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<!--navbar start-->
-		<nav>
-			<div class="logo">
-				<img src="../img/tray.png" alt="logo" />
-				<a href="/">GotMenu</a>
-			</div>
-			<div class="btn">
-				<a href="/user/login">로그인</a>
-				<a href="/user/signup">회원가입</a>
-			</div>
-		</nav>
-		<!--nevbar end-->
-
+<html layout:decorate="~{layout}">
         <!--content start-->
-        <section class="content">
+        <section layout:fragment="content" class="content">
+			<head>
+				<title>Signup</title>
+				<link rel="stylesheet" th:href="@{/css/signup.css}" />
+			</head>
+
 			<div class="title">
                 <span>GotMenu에 오신 것을</span><br>
 				<span class="welcome">환영합니다</span>
@@ -45,20 +27,5 @@
             <button onclick="signup()">가입하기</button> <!--구현 필요-->
 		</section>
         <!-- content end -->
-
-         <!--footer start -->
-		<footer class="footer">
-			<span class="copyright">CopyrightⓒTUKstudents</span>
-			<ul class="footer-menu">
-				<li>제안하기</li>
-				<li>후원하기</li>
-				<li>제작 과정</li>
-			</ul>
-			<span class="tel">Tel : 010-1234-5678</span>
-			</div>
-		</footer>
-		<!--footer end -->
-		<script src="/js/user/signup.js"></script>
-	</body>
 </html>
 
