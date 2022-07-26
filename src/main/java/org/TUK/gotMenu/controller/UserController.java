@@ -59,7 +59,7 @@ public class UserController
     public String logout()
     {
         userService.logout();
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("/") // 여기로 보내서 회원가입 (생성)
@@ -72,6 +72,8 @@ public class UserController
             return bindingResult.getAllErrors().get(0).getDefaultMessage();
         }
 
+
+
         // 저장한다.
         try
         {
@@ -83,7 +85,7 @@ public class UserController
             return "중복 ID입니다.";
         }
 
-        return "success";
+        return "성공";
     }
 
     @GetMapping("/") // 조회 (Read)
