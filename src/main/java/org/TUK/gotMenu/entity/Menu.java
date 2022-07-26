@@ -30,9 +30,7 @@ public class Menu {
     @Column(length = 1000)
     private String tags;
 
-
-    //추후 user와 병합
-//    @ManytoOne
-//    private User userNo;
+    @ManyToOne
+    private User writer;
 
 }

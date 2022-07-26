@@ -3,7 +3,9 @@ package org.TUK.gotMenu.service;
 import lombok.RequiredArgsConstructor;
 import org.TUK.gotMenu.DataNotFoundException;
 import org.TUK.gotMenu.entity.Menu;
+import org.TUK.gotMenu.entity.User;
 import org.TUK.gotMenu.repository.MenuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,8 @@ import javax.persistence.criteria.Root;
 public class MenuService {
 
     private final MenuRepository menuRepository;
+    @Autowired
+    private final SecurityService securityService;
 
     public void create(String menuComposition, String menuDetail, String menuDescription, int menuRating, String tags) {
         Menu m = new Menu();
@@ -35,6 +39,11 @@ public class MenuService {
         m.setMenuDescription(menuDescription);
         m.setMenuRating(menuRating);
         m.setTags(tags);
+
+        User writer = new User();
+        writer.setUserNo(securityService.getUserNo());
+        m.setWriter(writer);
+
         this.menuRepository.save(m);
     }
 
