@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer>
 {
-    @Query(value="SElECT * FROM comment WHERE menu_menu_no=:menuNo", nativeQuery = true)
+    @Query(value="SElECT * FROM comment WHERE menu_no=:menuNo", nativeQuery = true)
     Page<Comment> findByMenuNo(@Param("menuNo") int menuNo, Pageable pageable);
 
     @Query(value="SELECT * FROM comment WHERE comment_no=:commentNo", nativeQuery = true)

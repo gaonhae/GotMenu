@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.TUK.gotMenu.entity.Menu;
 import org.TUK.gotMenu.form.MenuForm;
 import org.TUK.gotMenu.service.MenuService;
+import org.TUK.gotMenu.service.SecurityService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ import javax.validation.Valid;
 public class MenuController {
 
     private final MenuService menuService;
+    @Autowired
+    private final SecurityService securityService;
 
     @RequestMapping("/list")
     public String list(Model model, @RequestParam(value="page", defaultValue="0") int page, @RequestParam(value = "kw", defaultValue = "") String kw){
@@ -36,6 +40,8 @@ public class MenuController {
 
     @GetMapping("/create")
     public String create(MenuForm menuForm){
+
+        if(securityService.getUserNo() == null) return "redirect:/menu/list";
        return "/menu/menuForm";
     }
 
@@ -51,6 +57,9 @@ public class MenuController {
     @GetMapping("/{menuNo}/modify")
     public String modify(MenuForm menuForm, @PathVariable("menuNo") Integer menuNo){
         Menu menu = this.menuService.getMenu(menuNo);
+        if(!securityService.isSameUser(menu.getWriter().getUserNo()))
+            return "redirect:/menu/list";
+
         menuForm.setMenuDescription(menu.getMenuDescription());
         menuForm.setMenuDetail(menu.getMenuDetail());
         menuForm.setMenuComposition(menu.getMenuComposition());
@@ -73,6 +82,9 @@ public class MenuController {
     @GetMapping("/{menuNo}/delete")
     public String delete(@PathVariable("menuNo") Integer menuNo){
         Menu menu = this.menuService.getMenu(menuNo);
+        if(!securityService.isSameUser(menu.getWriter().getUserNo()))
+            return "redirect:/menu/list";
+
         this.menuService.delete(menu);
         return "redirect:/menu/list";
     }
@@ -82,6 +94,17 @@ public class MenuController {
     @RequestMapping("/list/subframe")
     public String filter(){
         return "/menu/menuList_subframe";
+    }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    private Integer test()
+    {
+        if(securityService.getUserNo() == null) return null;
+        for (int i = 0 ; i < 1000 ; i ++){
+            this.menuService.create("미역국, 밥", "칼로리는 500kcal", "맛있는 미역국에 밥을 말아먹으면 꿀맛!", i, "가정식");
+        }
+        return securityService.getUserNo();
     }
 
 }

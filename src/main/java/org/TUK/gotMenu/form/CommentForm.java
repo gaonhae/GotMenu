@@ -51,7 +51,7 @@ public class CommentForm
                 .content(content)
                 .recomment(recomment)
                 .resistDate(resistDate)
-                .user(user)
+                .writer(user)
                 .menu(menu)
                 .build();
     }

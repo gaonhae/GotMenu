@@ -2,6 +2,7 @@ package org.TUK.gotMenu.service;
 
 import lombok.RequiredArgsConstructor;
 import org.TUK.gotMenu.SessionCode;
+import org.TUK.gotMenu.entity.Comment;
 import org.TUK.gotMenu.entity.User;
 import org.TUK.gotMenu.form.UserForm;
 import org.TUK.gotMenu.repository.UserRepository;
@@ -19,9 +20,13 @@ import java.time.format.DateTimeFormatter;
 public class UserService
 {
     @Autowired
-    HttpServletRequest request;
+    final HttpServletRequest request;
     @Autowired
-    UserRepository userRepository;
+    final UserRepository userRepository;
+    @Autowired
+    final CommentService commentService;
+    @Autowired
+    final MenuService menuService;
 
     public void create(UserForm user)
     {
@@ -98,6 +103,8 @@ public class UserService
     public void delete(int userNo)
     {
        User user = userRepository.findByUserNo(userNo);
+       user.getCommentList().stream().forEach(comment -> commentService.delete(comment.getCommentNo()));
+       user.getMenuList().stream().forEach(menu -> menuService.delete(menu));
        userRepository.delete(user);
     }
 

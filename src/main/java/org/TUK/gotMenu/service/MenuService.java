@@ -3,7 +3,9 @@ package org.TUK.gotMenu.service;
 import lombok.RequiredArgsConstructor;
 import org.TUK.gotMenu.DataNotFoundException;
 import org.TUK.gotMenu.entity.Menu;
+import org.TUK.gotMenu.entity.User;
 import org.TUK.gotMenu.repository.MenuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +30,10 @@ import org.json.JSONObject;
 public class MenuService {
 
     private final MenuRepository menuRepository;
+    @Autowired
+    private final CommentService commentService;
+    @Autowired
+    private final SecurityService securityService;
 
 
     public void create(String menuComposition, String menuDetail, String menuDescription, int menuRating, String tags) {
@@ -37,6 +43,11 @@ public class MenuService {
         m.setMenuDescription(menuDescription);
         m.setMenuRating(menuRating);
         m.setTags(tags);
+
+        User writer = new User();
+        writer.setUserNo(securityService.getUserNo());
+        m.setWriter(writer);
+
         this.menuRepository.save(m);
     }
 
@@ -65,6 +76,8 @@ public class MenuService {
     }
 
     public void delete(Menu menu) {
+        // 내부에 있는 코멘트들을 직접 삭제해줘야 User와의 연관이 해결되어 삭제할 수 있다.
+        menu.getCommentList().stream().forEach(comment -> commentService.delete(comment.getCommentNo()));
         this.menuRepository.delete(menu);
     }
 

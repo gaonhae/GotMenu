@@ -64,11 +64,11 @@ public class CommentService
         {
             JSONObject cJson = new JSONObject();
             cJson.put("commentNo", c.getCommentNo());
-            cJson.put("writerNo", c.getUser().getUserNo());
-            cJson.put("writerId", c.getUser().getId());
+            cJson.put("writerNo", c.getWriter().getUserNo());
+            cJson.put("writerId", c.getWriter().getId());
             cJson.put("content", c.getContent());
             cJson.put("resistDate", c.getResistDate());
-            cJson.put("isSameUser", securityService.isSameUser(c.getUser().getUserNo()));
+            cJson.put("isSameUser", securityService.isSameUser(c.getWriter().getUserNo()));
 
             array.put(cJson);
         }

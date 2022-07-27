@@ -2,9 +2,10 @@ package org.TUK.gotMenu.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 
 @Getter
@@ -30,9 +31,11 @@ public class Menu {
     @Column(length = 1000)
     private String tags;
 
+    @ManyToOne
+    @JoinColumn(name="writer_no")
+    private User writer;
 
-    //추후 user와 병합
-//    @ManytoOne
-//    private User userNo;
+    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
+    private List<Comment> commentList;
 
 }

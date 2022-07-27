@@ -72,8 +72,6 @@ public class UserController
             return bindingResult.getAllErrors().get(0).getDefaultMessage();
         }
 
-
-
         // 저장한다.
         try
         {
@@ -85,7 +83,7 @@ public class UserController
             return "중복 ID입니다.";
         }
 
-        return "성공";
+        return "success";
     }
 
     @GetMapping("/") // 조회 (Read)
