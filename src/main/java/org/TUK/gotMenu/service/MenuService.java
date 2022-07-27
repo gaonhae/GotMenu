@@ -103,7 +103,6 @@ public class MenuService {
         return tmp;
     }
 
-<<<<<<< HEAD
     public JSONObject getBoardList(String target, String keyword, int pageNo)
     {
         JSONObject object = new JSONObject();
@@ -122,7 +121,7 @@ public class MenuService {
 
         return object;
     }
-=======
+
     public String randomMenu(){
         List<Menu> all = this.menuRepository.findAll();
 
@@ -135,7 +134,6 @@ public class MenuService {
         return cJson.toString();
     }
 
->>>>>>> 7c1afcf3b5b2e1c03a52be5ff83a584b89882e68
 
 
 }
