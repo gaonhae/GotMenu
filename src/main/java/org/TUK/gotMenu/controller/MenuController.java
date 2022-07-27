@@ -7,12 +7,15 @@ import org.TUK.gotMenu.service.MenuService;
 import org.TUK.gotMenu.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RequestMapping("/menu")
 @Controller
@@ -89,12 +92,29 @@ public class MenuController {
         return "redirect:/menu/list";
     }
 
-
     //메뉴 리스트 페이지의 서브프레임 제공
     @RequestMapping("/list/subframe")
     public String filter(){
         return "/menu/menuList_subframe";
     }
+
+    @GetMapping("/")
+    public void getMenuList(HttpServletResponse response,
+                            @Param("target") String target, @Param("keyword") String keyword, @Param("pageNo") int pageNo)
+    {
+        try
+        {
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+            response.getWriter().println(target+" "+keyword+" "+pageNo);
+
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 
     @RequestMapping("/test")
     @ResponseBody
