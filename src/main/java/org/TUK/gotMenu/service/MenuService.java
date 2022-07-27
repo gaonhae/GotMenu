@@ -89,10 +89,11 @@ public class MenuService {
         return tmp;
     }
 
+    //메뉴 랜덤으로 골라서 json으로 반환
     public String randomMenu(){
         List<Menu> all = this.menuRepository.findAll();
 
-        Menu menu = this.menuRepository.findByMenuNo((int)(Math.random()*all.size())+ 9);//여기 +9 된 게 메뉴 No가 점점 증가해서 그런 건데 이거 좀 처리가 필요할 듯
+        Menu menu = all.get((int)(Math.random()*all.size()));//
 
         JSONObject cJson = new JSONObject();
         cJson.put("menuMenuComposition", menu.getMenuComposition());
