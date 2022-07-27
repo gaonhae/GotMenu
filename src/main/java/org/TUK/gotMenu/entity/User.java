@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,5 +29,16 @@ public class User
     String joinDate; // 가입일
     @Column(name="user_detail")
     String userDetail; // 유저 설명
+
+    @OneToMany(mappedBy = "writer")
+    List<Menu> menuList;
+    @OneToMany(mappedBy = "writer")
+    List<Comment> commentList;
+
+    public void deletable()
+    {
+        menuList.stream().forEach(menu -> menu.deletable());
+        commentList.stream().forEach(comment -> comment.setMenu(null));
+    }
 
 }

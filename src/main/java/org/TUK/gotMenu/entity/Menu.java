@@ -2,9 +2,10 @@ package org.TUK.gotMenu.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.ParameterScriptAssert;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 
 @Getter
@@ -32,5 +33,14 @@ public class Menu {
 
     @ManyToOne
     private User writer;
+
+    @OneToMany(mappedBy = "menu")
+    private List<Comment> commentList;
+
+    public void deletable()
+    {
+        // 모든 댓글의 유저와의 관계를 끊어라.
+        commentList.stream().forEach(c -> c.setWriter(null));
+    }
 
 }

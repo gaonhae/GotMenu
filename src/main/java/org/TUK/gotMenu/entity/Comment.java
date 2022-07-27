@@ -25,8 +25,19 @@ public class Comment
     String resistDate;
 
     @ManyToOne(cascade = CascadeType.DETACH)
-    User user;
+    User writer;
     @ManyToOne(cascade = CascadeType.DETACH)
     Menu menu;
+
+    public void cutRelationUser()
+    {
+        writer = null;
+    }
+    public void cutRelationMenu()
+    {
+        menu = null;
+    }
+
+
 
 }

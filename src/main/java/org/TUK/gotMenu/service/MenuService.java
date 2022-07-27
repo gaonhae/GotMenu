@@ -72,6 +72,7 @@ public class MenuService {
     }
 
     public void delete(Menu menu) {
+        menu.deletable();
         this.menuRepository.delete(menu);
     }
 
