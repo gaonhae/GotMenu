@@ -90,9 +90,10 @@ public class MenuController {
     }
 
 
-    @GetMapping("/list/filter")
-    public void filter(){
-
+    //메뉴 리스트 페이지의 서브프레임 제공
+    @RequestMapping("/list/subframe")
+    public String filter(){
+        return "/menu/menuList_subframe";
     }
 
     @RequestMapping("/test")
