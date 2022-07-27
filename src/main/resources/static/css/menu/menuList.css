@@ -18,7 +18,7 @@ body {
 }
 
 .mainframe {
-	width: 70%;
+	width: 70%; // 이거 100%로 하면 커짐
 }
 
 .title-row {
@@ -106,6 +106,7 @@ body {
 .menuList-box {
 	display: flex;
 	flex-direction: column;
+	min-height: 500px;
 }
 
 .menuList-row {

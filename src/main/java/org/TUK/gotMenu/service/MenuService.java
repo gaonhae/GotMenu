@@ -5,6 +5,7 @@ import org.TUK.gotMenu.DataNotFoundException;
 import org.TUK.gotMenu.entity.Menu;
 import org.TUK.gotMenu.entity.User;
 import org.TUK.gotMenu.repository.MenuRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -100,6 +101,25 @@ public class MenuService {
             }
         }
         return tmp;
+    }
+
+    public JSONObject getBoardList(String target, String keyword, int pageNo)
+    {
+        JSONObject object = new JSONObject();
+
+        Page<Menu> page;
+        Pageable pageable = PageRequest.of(pageNo, 10);
+        if(target.equals("메뉴")) page = menuRepository.findByMenuComposition(keyword, pageable);
+        else if(target.equals("메뉴 설명")) page = menuRepository.findByMenuDetail(keyword, pageable);
+        else if(target.equals("태그")) page = menuRepository.findByTags(keyword, pageable);
+        else if(target.equals("글쓴이")) page = menuRepository.findByTags(keyword, pageable);
+        else page = menuRepository.findByMenuComposition("", pageable);
+
+        // 페이징 버튼 정보
+        int startBtn = pageNo - 2;
+        
+
+        return object;
     }
 
     //메뉴 랜덤으로 골라서 json으로 반환
