@@ -18,5 +18,6 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
             + "   m.menuComposition like %:kw% "
             + "   or m.menuDescription like %:kw% ")
     Page<Menu> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
-
+    
+    Menu findByMenuNo(Integer n);
 }

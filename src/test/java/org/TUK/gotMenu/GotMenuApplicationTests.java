@@ -1,12 +1,10 @@
 package org.TUK.gotMenu;
 
 import org.TUK.gotMenu.repository.CommentRepository;
-import org.TUK.gotMenu.repository.MenuRepository;
 import org.TUK.gotMenu.service.MenuService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import sun.tools.jconsole.JConsole;
 
 @SpringBootTest
 class GotMenuApplicationTests {
