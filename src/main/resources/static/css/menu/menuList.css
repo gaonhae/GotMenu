@@ -1,0 +1,157 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,500;1,400;1,500&display=swap");
+body {
+	font-family: "Ubuntu", sans-serif;
+	-ms-overflow-style: none;
+}
+
+/* 스크롤바 감춤 */
+::-webkit-scrollbar {
+	display: none;
+}
+
+.content-box {
+	overflow: scroll;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+}
+
+.mainframe {
+	width: 70%;
+}
+
+.title-row {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	margin-left: 150px;
+}
+
+.searchbar-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 400px;
+	height: 40px;
+	background-color: white;
+	border-radius: 10px;
+	border: #ad9fe3 solid 1px;
+}
+
+.searchbar-row > input {
+	margin-left: 2%;
+	outline: none;
+	border: none;
+	border-radius: 30px;
+	width: 350px;
+	height: 35px;
+}
+
+.searchbar-row > button {
+	background-color: #ad9fe3;
+	border: none;
+	width: 50px;
+	height: 40px;
+	border-radius: 0px 8px 8px 0px;
+	outline: none;
+}
+
+.searchbar-row > button > img {
+	width: 25px;
+	height: 25px;
+}
+
+.menu-create {
+	margin-right: 150px;
+	text-decoration: none;
+	color: white;
+	background-color: #ad9fe3;
+	padding: 10px;
+	border-radius: 10px;
+	font-weight: 900;
+}
+
+.header-row {
+	margin: 20px 150px;
+	padding-bottom: 10px;
+	border-bottom: black solid 2px;
+	display: flex;
+	font-weight: 900;
+}
+
+.header-row > span {
+	font-size: 20px;
+}
+.title-header {
+	margin-left: 30px;
+	width: 40%;
+}
+.tags-header {
+	width: 40%;
+}
+.viewed-header {
+	width: 15%;
+}
+.likes-header {
+	width: 5%;
+	margin-right: 30px;
+}
+
+.menuList-box {
+	display: flex;
+	flex-direction: column;
+}
+
+.menuList-row {
+	display: flex;
+	align-items: center;
+	border: black solid 1px;
+	margin: 10px 150px;
+	height: 50px;
+}
+
+.menu-title {
+	font-size: 20px;
+	font-weight: 900;
+	margin-left: 30px;
+	text-decoration: none;
+	color: black;
+	width: 40%;
+}
+.menu-tags {
+	color: gray;
+	width: 40%;
+}
+.menu-viewed {
+	color: black;
+	width: 15%;
+	font-size: 12px;
+}
+.menu-likes {
+	margin-right: 30px;
+	color: black;
+	width: 5%;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	background-color: #ad9fe3;
+	padding: 8px;
+	border-radius: 12px;
+}
+
+iframe {
+	position: fixed;
+	display: flex;
+	flex-grow: 1;
+	margin-left: 70%;
+	width: 30%;
+	height: 100vh;
+	border-left: gray solid 2px;
+	box-shadow: -3px 7px 10px 1px gray;
+}
