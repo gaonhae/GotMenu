@@ -103,7 +103,6 @@ public class MenuService {
         return tmp;
     }
 
-<<<<<<< HEAD
     public JSONObject getBoardList(String target, String keyword, int pageNo)
     {
         JSONObject object = new JSONObject();
@@ -123,9 +122,7 @@ public class MenuService {
         return object;
     }
 
-=======
     //메뉴 랜덤으로 골라서 json으로 반환
->>>>>>> 3c1d4336155ffe774d068b615d8e129ff4747412
     public String randomMenu(){
         List<Menu> all = this.menuRepository.findAll();
 
