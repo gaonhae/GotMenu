@@ -30,15 +30,10 @@ public class User
     @Column(name="user_detail")
     String userDetail; // 유저 설명
 
-    @OneToMany(mappedBy = "writer")
+    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
     List<Menu> menuList;
-    @OneToMany(mappedBy = "writer")
+    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
     List<Comment> commentList;
 
-    public void deletable()
-    {
-        menuList.stream().forEach(menu -> menu.deletable());
-        commentList.stream().forEach(comment -> comment.setMenu(null));
-    }
 
 }

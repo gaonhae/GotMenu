@@ -24,20 +24,11 @@ public class Comment
     @NotNull
     String resistDate;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name="writer_no")
     User writer;
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinColumn(name="menu_no")
     Menu menu;
-
-    public void cutRelationUser()
-    {
-        writer = null;
-    }
-    public void cutRelationMenu()
-    {
-        menu = null;
-    }
-
-
 
 }

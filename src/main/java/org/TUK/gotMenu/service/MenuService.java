@@ -30,6 +30,8 @@ public class MenuService {
 
     private final MenuRepository menuRepository;
     @Autowired
+    private final CommentService commentService;
+    @Autowired
     private final SecurityService securityService;
 
     public void create(String menuComposition, String menuDetail, String menuDescription, int menuRating, String tags) {
@@ -72,7 +74,8 @@ public class MenuService {
     }
 
     public void delete(Menu menu) {
-        menu.deletable();
+        // 내부에 있는 코멘트들을 직접 삭제해줘야 User와의 연관이 해결되어 삭제할 수 있다.
+        menu.getCommentList().stream().forEach(comment -> commentService.delete(comment.getCommentNo()));
         this.menuRepository.delete(menu);
     }
 

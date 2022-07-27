@@ -32,15 +32,10 @@ public class Menu {
     private String tags;
 
     @ManyToOne
+    @JoinColumn(name="writer_no")
     private User writer;
 
-    @OneToMany(mappedBy = "menu")
+    @OneToMany(mappedBy = "menu", fetch = FetchType.LAZY)
     private List<Comment> commentList;
-
-    public void deletable()
-    {
-        // 모든 댓글의 유저와의 관계를 끊어라.
-        commentList.stream().forEach(c -> c.setWriter(null));
-    }
 
 }
