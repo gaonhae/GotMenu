@@ -17,12 +17,13 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+import java.util.Random;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.json.JSONObject;
 
 
 @Service
@@ -34,6 +35,7 @@ public class MenuService {
     private final CommentService commentService;
     @Autowired
     private final SecurityService securityService;
+
 
     public void create(String menuComposition, String menuDetail, String menuDescription, int menuRating, String tags) {
         Menu m = new Menu();
@@ -101,6 +103,7 @@ public class MenuService {
         return tmp;
     }
 
+<<<<<<< HEAD
     public JSONObject getBoardList(String target, String keyword, int pageNo)
     {
         JSONObject object = new JSONObject();
@@ -119,6 +122,20 @@ public class MenuService {
 
         return object;
     }
+=======
+    public String randomMenu(){
+        List<Menu> all = this.menuRepository.findAll();
+
+        Menu menu = this.menuRepository.findByMenuNo((int)(Math.random()*all.size())+ 9);//여기 +9 된 게 메뉴 No가 점점 증가해서 그런 건데 이거 좀 처리가 필요할 듯
+
+        JSONObject cJson = new JSONObject();
+        cJson.put("menuMenuComposition", menu.getMenuComposition());
+        cJson.put("menuTags", menu.getTags());
+
+        return cJson.toString();
+    }
+
+>>>>>>> 7c1afcf3b5b2e1c03a52be5ff83a584b89882e68
 
 
 }

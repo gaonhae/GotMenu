@@ -18,6 +18,7 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
             + "   m.menuComposition like %:kw% "
             + "   or m.menuDescription like %:kw% ")
     Page<Menu> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
+<<<<<<< HEAD
 
     @Query(value = "SELECT * FROM gotmenu.menu WHERE menu_composition like %:kw%", nativeQuery = true)
     Page<Menu> findByMenuComposition(@Param("kw") String kw, Pageable pageable);
@@ -33,4 +34,8 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
     Page<Menu> findByWriterId(@Param("kw") String kw, Pageable pageable);
 
 
+=======
+    
+    Menu findByMenuNo(Integer n);
+>>>>>>> 7c1afcf3b5b2e1c03a52be5ff83a584b89882e68
 }

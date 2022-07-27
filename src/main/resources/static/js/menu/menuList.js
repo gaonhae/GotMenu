@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 // 초기값
 let target = "메뉴";
@@ -29,3 +30,5 @@ function createList(message)
 
 
 
+=======
+>>>>>>> 7c1afcf3b5b2e1c03a52be5ff83a584b89882e68
