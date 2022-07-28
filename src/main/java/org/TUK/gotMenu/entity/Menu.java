@@ -27,6 +27,9 @@ public class Menu {
     private String menuDescription;
 
     private Integer menuRating;
+    @Column(length = 3000)
+    private String Raters;
+    private Integer views;
 
     @Column(length = 1000)
     private String tags;

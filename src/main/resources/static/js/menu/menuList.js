@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 // 초기값
 let target = "메뉴";
@@ -15,20 +14,27 @@ function search()
         url : "/menu/",
         data : {"target" : target, "keyword" : keyword, "pageNo" : pageNo},
         method : "GET",
-        success : message => alert(message),
+        success : createList,
         error :
             e => alert(e.responseText)
     })
 
 }
 
-function createList(message)
+function createList(object)
 {
+    var menuHtml = "";
+    for(let i=0; i < object.array.length; i++)
+    {
+        menuHtml +=
+        '<div class="menuList-row">'+
+        '	<a href="#" class="menu-title">' + object.array[i].menuComposition +'</a>'+
+        '	<span class="menu-tags">'+ object.array[i].tags +'</span>'+
+        '	<span class="menu-viewed">' +  object.array[i].views + '회 조회</span>'+
+        '	<span class="menu-likes">' + object.array[i].menuRating + '</span>'+
+        '</div>';
+    }
 
+    $("#menuBox").html(menuHtml);
 
 }
-
-
-
-=======
->>>>>>> 7c1afcf3b5b2e1c03a52be5ff83a584b89882e68
