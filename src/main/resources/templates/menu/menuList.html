@@ -5,9 +5,9 @@
 	</head>
 	<body>
 		<div layout:fragment="content" class="content-box">
-			<div class="mainframe">
+			<div class="mainframe after">
 				<div class="title-row">
-					<h1 class="title">메뉴 추천</h1>
+					<h1 class="title" >메뉴 추천</h1>
 					<div class="searchbar-row">
 						<select id="target">
 							<option>메뉴</option>
@@ -31,13 +31,17 @@
 				<div id="menuBox" class="menuList-box">
 
 				</div>
-				<div id="pageBox">
+				<div id="pageBox" class="menuList-row" style="border-style: none;">
 
 				</div>
 			</div>
-			<iframe th:src="@{/menu/list/subframe}" frameborder="0" scrolling="auto"></iframe>
+			<iframe id="subframe" th:src="@{/menu/list/subframe}" frameborder="0" scrolling="auto"></iframe>
 			<script src="/js/menu/menuList.js"></script>
-			<script>search()</script>
+			<script>
+				search();
+				$("#subframe").hide();
+
+			</script>
 
 		</div>
 	</body>

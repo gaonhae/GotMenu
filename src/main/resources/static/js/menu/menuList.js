@@ -40,6 +40,7 @@ function createList(object)
     if(object.array.length == 0)
     {
         $("#menuBox").html('<div class="menuList-row"><label style="text-decoration: italic; margin: 50px;">no result</label></div>');
+        $("#pageBox").html("");
         return;
     }
 
@@ -60,10 +61,10 @@ function createList(object)
     {
         if(object.nowBtn == i)
         pageHtml +=
-        '<button class="pageBtn" onclick="pageChange(' + i + ')" style="text-decoration: underline;">' + i + '</button>';
+        '<button class="pageBtn" onclick="pageChange(' + i + ')" style="text-decoration: underline;">' + (i+1) + '</button>';
         else
         pageHtml +=
-        '<button class="pageBtn" onclick="pageChange(' + i + ')">' + i + '</button>';
+        '<button class="pageBtn" onclick="pageChange(' + i + ')">' + (i+1) + '</button>';
     }
 
     $("#menuBox").html(menuHtml);
