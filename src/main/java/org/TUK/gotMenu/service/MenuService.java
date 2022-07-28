@@ -113,11 +113,16 @@ public class MenuService {
         JSONObject object = new JSONObject();
 
         Page<Menu> page;
-        Pageable pageable = PageRequest.of(pageNo, 10);
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.by("menu_no").descending());
         if(target.equals("메뉴")) page = menuRepository.findByMenuComposition(keyword, pageable);
         else if(target.equals("메뉴 설명")) page = menuRepository.findByMenuDetail(keyword, pageable);
         else if(target.equals("태그")) page = menuRepository.findByTags(keyword, pageable);
-        else if(target.equals("글쓴이")) page = menuRepository.findByWriterId(keyword, pageable);
+        else if(target.equals("글쓴이"))
+        {
+            // 얘는 JPQL이라 필드명으로 넣어줘야한다..
+            pageable = PageRequest.of(pageNo, 10, Sort.by("menuNo").descending());
+            page = menuRepository.findByWriterId(keyword, pageable);
+        }
         else page = menuRepository.findByMenuComposition("", pageable);
 
         // 페이징 버튼 정보

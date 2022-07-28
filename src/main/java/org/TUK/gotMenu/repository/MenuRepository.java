@@ -28,8 +28,7 @@ public interface MenuRepository extends JpaRepository<Menu, Integer> {
     @Query(value = "SELECT * FROM gotmenu.menu WHERE tags like %:kw%", nativeQuery = true)
     Page<Menu> findByTags(@Param("kw") String kw, Pageable pageable);
 
-    @Query(value = "SELECT * FROM gotmenu.menu  left join " +
-            "gotmenu.user on gotmenu.menu.writer_no=user.user_no where id like '%:kw%';", nativeQuery = true)
+    @Query(value = "select m from Menu m JOIN m.writer u where u.id like %:kw%")
     Page<Menu> findByWriterId(@Param("kw") String kw, Pageable pageable);
 
     Menu findByMenuNo(Integer n);

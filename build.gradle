@@ -38,6 +38,7 @@ dependencies {
 	implementation group: 'org.json', name: 'json', version: '20220320' // JSON 라이브러리
 
 	implementation 'com.google.code.findbugs:jsr305:3.0.2'//이거 뭐 하는 건지 잘 몰라. 근데 이거 있어야 빌드 오류가 안 생겨
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8' // 쿼리문을 로그로 보여주는 라이브러리
 }
 
 tasks.named('test') {
