@@ -5,6 +5,7 @@ import org.TUK.gotMenu.DataNotFoundException;
 import org.TUK.gotMenu.entity.Menu;
 import org.TUK.gotMenu.entity.User;
 import org.TUK.gotMenu.repository.MenuRepository;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,6 +46,10 @@ public class MenuService {
         m.setMenuRating(menuRating);
         m.setTags(tags);
 
+        m.setViews(0);
+        m.setRaters("");
+
+        // 작성자에 대한 정보를 등록
         User writer = new User();
         writer.setUserNo(securityService.getUserNo());
         m.setWriter(writer);
@@ -103,7 +108,7 @@ public class MenuService {
         return tmp;
     }
 
-    public JSONObject getBoardList(String target, String keyword, int pageNo)
+    public String getBoardList(String target, String keyword, int pageNo)
     {
         JSONObject object = new JSONObject();
 
@@ -112,14 +117,38 @@ public class MenuService {
         if(target.equals("메뉴")) page = menuRepository.findByMenuComposition(keyword, pageable);
         else if(target.equals("메뉴 설명")) page = menuRepository.findByMenuDetail(keyword, pageable);
         else if(target.equals("태그")) page = menuRepository.findByTags(keyword, pageable);
-        else if(target.equals("글쓴이")) page = menuRepository.findByTags(keyword, pageable);
+        else if(target.equals("글쓴이")) page = menuRepository.findByWriterId(keyword, pageable);
         else page = menuRepository.findByMenuComposition("", pageable);
 
         // 페이징 버튼 정보
         int startBtn = pageNo - 2;
-        
+        int endBtn = pageNo + 3;
+        int nowBtn = pageNo;
 
-        return object;
+        if(startBtn < 0) startBtn = 0;
+        if(page.getTotalPages() < endBtn) endBtn = page.getTotalPages();
+
+        // 글 정보 담기
+        JSONArray array = new JSONArray();
+        for(Menu m : page)
+        {
+            JSONObject temp = new JSONObject();
+            temp.put("menuNo", m.getMenuNo());
+            temp.put("menuComposition", m.getMenuComposition());
+            temp.put("menuRating", m.getMenuRating());
+            temp.put("tags", m.getTags());
+            temp.put("views", m.getViews());
+
+            array.put(temp);
+        }
+
+        // 담아주기
+        object.put("startBtn", startBtn);
+        object.put("endBtn", endBtn);
+        object.put("nowBtn", nowBtn);
+        object.put("array", array);
+
+        return object.toString();
     }
 
     //메뉴 랜덤으로 골라서 json으로 반환
