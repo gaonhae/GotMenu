@@ -6,6 +6,7 @@ let pageNo = 0;
 
 function search()
 {
+
     target = $("#target").val();
     keyword = $("#search_kw").val();
     pageNo = 0;

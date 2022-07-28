@@ -16,7 +16,7 @@
 							<option>글쓴이</option>
 						</select>
 						<input type="text" id="search_kw" class="form-control" th:value="${kw}" placeholder="검색어를 입력해주세요" />
-						<button type="button" id="btn_search">
+						<button type="button" id="btn_search" onclick="search()">
 							<img th:src="@{/img/search.png}" alt="" />
 						</button>
 					</div>

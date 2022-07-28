@@ -117,7 +117,7 @@ public class MenuService {
         if(target.equals("메뉴")) page = menuRepository.findByMenuComposition(keyword, pageable);
         else if(target.equals("메뉴 설명")) page = menuRepository.findByMenuDetail(keyword, pageable);
         else if(target.equals("태그")) page = menuRepository.findByTags(keyword, pageable);
-        else if(target.equals("글쓴이")) page = menuRepository.findByTags(keyword, pageable);
+        else if(target.equals("글쓴이")) page = menuRepository.findByWriterId(keyword, pageable);
         else page = menuRepository.findByMenuComposition("", pageable);
 
         // 페이징 버튼 정보
