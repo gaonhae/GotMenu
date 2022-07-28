@@ -18,7 +18,10 @@ body {
 }
 
 .mainframe {
-	width: 70%; // 이거 100%로 하면 커짐
+	width: 100%; // 이거 100%로 하면 커짐
+}
+.mainframe.after {
+    width: 70%;
 }
 
 .title-row {

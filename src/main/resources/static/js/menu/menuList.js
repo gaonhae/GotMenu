@@ -22,8 +22,28 @@ function search()
 
 }
 
+function pageChange(number)
+{
+    pageNo = number;
+    $.ajax({
+        url : "/menu/",
+        data : {"target" : target, "keyword" : keyword, "pageNo" : pageNo},
+        method : "GET",
+        success : createList,
+        error :
+            e => alert(e.responseText)
+    })
+}
+
 function createList(object)
 {
+    if(object.array.length == 0)
+    {
+        $("#menuBox").html('<div class="menuList-row"><label style="text-decoration: italic; margin: 50px;">no result</label></div>');
+        $("#pageBox").html("");
+        return;
+    }
+
     var menuHtml = "";
     for(let i=0; i < object.array.length; i++)
     {
@@ -36,6 +56,17 @@ function createList(object)
         '</div>';
     }
 
-    $("#menuBox").html(menuHtml);
+    var pageHtml = ""
+    for(let i = object.startBtn; i < object.endBtn; i++)
+    {
+        if(object.nowBtn == i)
+        pageHtml +=
+        '<button class="pageBtn" onclick="pageChange(' + i + ')" style="text-decoration: underline;">' + (i+1) + '</button>';
+        else
+        pageHtml +=
+        '<button class="pageBtn" onclick="pageChange(' + i + ')">' + (i+1) + '</button>';
+    }
 
+    $("#menuBox").html(menuHtml);
+    $("#pageBox").html(pageHtml);
 }

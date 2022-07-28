@@ -5,9 +5,9 @@
 	</head>
 	<body>
 		<div layout:fragment="content" class="content-box">
-			<div class="mainframe">
+			<div class="mainframe after">
 				<div class="title-row">
-					<h1 class="title">메뉴 추천</h1>
+					<h1 class="title" >메뉴 추천</h1>
 					<div class="searchbar-row">
 						<select id="target">
 							<option>메뉴</option>
@@ -29,52 +29,19 @@
 					<span class="likes-header">평점</span>
 				</div>
 				<div id="menuBox" class="menuList-box">
-					<div class="menuList-row">
-						<a href="#" class="menu-title">미역국, 김치, 쌀밥</a>
-						<span class="menu-tags">#건강식#입맛없을때#뜨듯</span>
-						<span class="menu-viewed">12345678회 조회</span>
-						<span class="menu-likes">+1234</span>
-					</div>
-					<div class="menuList-row">
-						<a href="#" class="menu-title">미역국, 김치, 쌀밥</a>
-						<span class="menu-tags">#건강식#입맛없을때#뜨듯</span>
-						<span class="menu-viewed">12345678회 조회</span>
-						<span class="menu-likes">+1234</span>
-					</div>
-					<div class="menuList-row">
-						<a href="#" class="menu-title">미역국, 김치, 쌀밥</a>
-						<span class="menu-tags">#건강식#입맛없을때#뜨듯</span>
-						<span class="menu-viewed">12345678회 조회</span>
-						<span class="menu-likes">+1234</span>
-					</div>
-					<div class="menuList-row">
-						<a href="#" class="menu-title">미역국, 김치, 쌀밥</a>
-						<span class="menu-tags">#건강식#입맛없을때#뜨듯</span>
-						<span class="menu-viewed">12345678회 조회</span>
-						<span class="menu-likes">+1234</span>
-					</div>
-					<div class="menuList-row">
-						<a href="#" class="menu-title">미역국, 김치, 쌀밥</a>
-						<span class="menu-tags">#건강식#입맛없을때#뜨듯</span>
-						<span class="menu-viewed">12345678회 조회</span>
-						<span class="menu-likes">+1234</span>
-					</div>					<div class="menuList-row">
-					<a href="#" class="menu-title">미역국, 김치, 쌀밥</a>
-					<span class="menu-tags">#건강식#입맛없을때#뜨듯</span>
-					<span class="menu-viewed">12345678회 조회</span>
-					<span class="menu-likes">+1234</span>
-				</div>					<div class="menuList-row">
-					<a href="#" class="menu-title">미역국, 김치, 쌀밥</a>
-					<span class="menu-tags">#건강식#입맛없을때#뜨듯</span>
-					<span class="menu-viewed">12345678회 조회</span>
-					<span class="menu-likes">+1234</span>
+
 				</div>
+				<div id="pageBox" class="menuList-row" style="border-style: none;">
 
 				</div>
 			</div>
-			<iframe th:src="@{/menu/list/subframe}" frameborder="0" scrolling="auto"></iframe>
+			<iframe id="subframe" th:src="@{/menu/list/subframe}" frameborder="0" scrolling="auto"></iframe>
 			<script src="/js/menu/menuList.js"></script>
-			<script>search()</script>
+			<script>
+				search();
+				$("#subframe").hide();
+
+			</script>
 
 		</div>
 	</body>
