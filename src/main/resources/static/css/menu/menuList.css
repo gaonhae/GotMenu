@@ -89,7 +89,7 @@ body {
 }
 
 .header-row > span {
-	font-size: 20px;
+	font-size: 15px;
 }
 .title-header {
 	margin-left: 30px;
@@ -118,27 +118,40 @@ body {
 	border: black solid 1px;
 	margin: 10px 150px;
 	height: 50px;
+	cursor: pointer;
+}
+.menuList-row:hover {
+    background: #f0f0f0;
 }
 
 .menu-title {
 	font-size: 20px;
 	font-weight: 900;
 	margin-left: 30px;
+	margin-right: 5%;
 	text-decoration: none;
 	color: black;
 	width: 40%;
+	white-space: nowrap;
+    overflow: hidden;
+	text-overflow: ellipsis;
 }
 .menu-tags {
 	color: gray;
 	width: 40%;
+  	white-space: nowrap;
+    overflow: hidden;
+  	text-overflow: ellipsis;
 }
 .menu-viewed {
 	color: black;
 	width: 15%;
 	font-size: 12px;
+	text-align: right;
 }
 .menu-likes {
 	margin-right: 30px;
+	margin-left: 7%;
 	color: black;
 	width: 5%;
 	text-align: center;
@@ -158,4 +171,23 @@ iframe {
 	height: 100vh;
 	border-left: gray solid 2px;
 	box-shadow: -3px 7px 10px 1px gray;
+}
+
+.pageBtn {
+    background: white;
+    border-style: solid;
+    border-color: #9784e0;
+    color: #9784e0;
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.pageBox {
+	display: flex;
+	align-items: center;
+	border: black solid 1px;
+	margin: 10px 150px;
+	height: 50px;
+	justify-content: center;
 }
