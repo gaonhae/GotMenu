@@ -113,7 +113,7 @@ public class MenuService {
         JSONObject object = new JSONObject();
 
         Page<Menu> page;
-        Pageable pageable = PageRequest.of(pageNo, 10, Sort.by("menu_no").descending());
+        Pageable pageable = PageRequest.of(pageNo, 20, Sort.by("menu_no").descending());
         if(target.equals("메뉴")) page = menuRepository.findByMenuComposition(keyword, pageable);
         else if(target.equals("메뉴 설명")) page = menuRepository.findByMenuDetail(keyword, pageable);
         else if(target.equals("태그")) page = menuRepository.findByTags(keyword, pageable);
@@ -130,8 +130,16 @@ public class MenuService {
         int endBtn = pageNo + 3;
         int nowBtn = pageNo;
 
-        if(startBtn < 0) startBtn = 0;
-        if(page.getTotalPages() < endBtn) endBtn = page.getTotalPages();
+        // 버튼 넣어주기
+        if(startBtn < 0) {
+            startBtn = 0;
+            if(5 <= page.getTotalPages())endBtn = 5;
+            else endBtn = page.getTotalPages();
+        }
+        else if(page.getTotalPages() < endBtn) {
+            startBtn = page.getTotalPages()-5;
+            endBtn = page.getTotalPages();
+        }
 
         // 글 정보 담기
         JSONArray array = new JSONArray();

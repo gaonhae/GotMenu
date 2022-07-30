@@ -4,6 +4,7 @@ let target = "메뉴";
 let keyword = "";
 let pageNo = 0;
 
+// 검색 함수
 function search()
 {
 
@@ -21,7 +22,7 @@ function search()
     })
 
 }
-
+// 페이지를 바꿔주는 함수
 function pageChange(number)
 {
     pageNo = number;
@@ -35,6 +36,7 @@ function pageChange(number)
     })
 }
 
+// 페이지를 받아오는데 성공했다면 그걸 삽입해주는 함수
 function createList(object)
 {
     if(object.array.length == 0)
@@ -48,10 +50,10 @@ function createList(object)
     for(let i=0; i < object.array.length; i++)
     {
         menuHtml +=
-        '<div class="menuList-row">'+
+        '<div class="menuList-row" onclick="getSummary()">'+
         '	<a href="#" class="menu-title">' + object.array[i].menuComposition +'</a>'+
         '	<span class="menu-tags">'+ object.array[i].tags +'</span>'+
-        '	<span class="menu-viewed">' +  object.array[i].views + '회 조회</span>'+
+        '	<span class="menu-viewed">' +  object.array[i].views + '</span>'+
         '	<span class="menu-likes">' + object.array[i].menuRating + '</span>'+
         '</div>';
     }
@@ -61,7 +63,7 @@ function createList(object)
     {
         if(object.nowBtn == i)
         pageHtml +=
-        '<button class="pageBtn" onclick="pageChange(' + i + ')" style="text-decoration: underline;">' + (i+1) + '</button>';
+        '<button class="pageBtn" onclick="pageChange(' + i + ')" style="text-decoration: underline; font-weight: bold;">' + (i+1) + '</button>';
         else
         pageHtml +=
         '<button class="pageBtn" onclick="pageChange(' + i + ')">' + (i+1) + '</button>';
@@ -69,4 +71,24 @@ function createList(object)
 
     $("#menuBox").html(menuHtml);
     $("#pageBox").html(pageHtml);
+}
+
+let mode = false;
+function getSummary()
+{
+/*
+    $.ajax({
+    });
+*/
+    $(".mainframe").toggleClass('after');
+    if(mode == false)
+    {
+        $("#subframe").show();
+    }
+    else
+    {
+        $("#subframe").hide();
+    }
+    mode = !mode;
+
 }
